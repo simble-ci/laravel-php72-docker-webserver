@@ -16,16 +16,13 @@ ENV LC_ALL en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 ENV COMPOSER_HOME /home/jenkins/.composer
 
-# Volume for composer
-VOLUME /home/jenkins/.composer
-
 # Set user jenkins to the image
 RUN groupadd -g 117 jenkins \
     && useradd -g 117 -u 112 -d /home/jenkins -s /bin/sh jenkins \
-    && echo "jenkins:jenkins" | chpasswd \
-    && mkdir -p "$COMPOSER_HOME" \
-    && chown jenkins:jenkins "$COMPOSER_HOME" \
-    && chmod 0777 "$COMPOSER_HOME"
+    && echo "jenkins:jenkins" | chpasswd
+
+# Volume for composer
+VOLUME /home/jenkins/.composer
 
 # run install git, curl 
 RUN add-apt-repository ppa:ondrej/php \
@@ -49,6 +46,11 @@ RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/5.6/fpm/php.ini 
 
 # run install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Create composer home
+RUN mkdir -p "$COMPOSER_HOME" \
+    && chown jenkins:jenkins "$COMPOSER_HOME" \
+    && chmod 0777 "$COMPOSER_HOME"
 
 ADD config/init-start.sh /init-start.sh
 RUN chmod +x /init-start.sh
