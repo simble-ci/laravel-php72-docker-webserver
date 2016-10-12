@@ -26,7 +26,7 @@ VOLUME /home/jenkins/.composer
 
 # run install git, curl 
 RUN add-apt-repository ppa:ondrej/php \
-    && apt-get update && apt-get install -y git curl \
+    && apt-get update && apt-get install -y unzip git curl \
     && curl -sL https://deb.nodesource.com/setup_4.x | bash - \
     && apt-get install -y nodejs
 
