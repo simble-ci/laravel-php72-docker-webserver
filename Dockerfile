@@ -27,7 +27,7 @@ VOLUME /home/jenkins
 # run install git, curl 
 RUN add-apt-repository ppa:ondrej/php \
     && apt-get update && apt-get install -y unzip git curl \
-    && curl -sL https://deb.nodesource.com/setup_4.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && apt-get install -y nodejs
 
 # run install mysql-server
@@ -50,7 +50,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Create cache home
 RUN mkdir -p "/home/jenkins" \
     && chown jenkins:jenkins "/home/jenkins" \
-    && chmod 0777 "/home/jenkins"
+    && chmod 0777 "/home/jenkins" \
+    && npm install npm -g
 
 ADD config/init-start.sh /init-start.sh
 RUN chmod +x /init-start.sh
