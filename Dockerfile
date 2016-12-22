@@ -50,8 +50,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Create cache home
 RUN mkdir -p "/home/jenkins" \
     && chown jenkins:jenkins "/home/jenkins" \
-    && chmod 0777 "/home/jenkins" \
-    && npm install npm -g
+    && chmod 0777 "/home/jenkins"
 
 ADD config/init-start.sh /init-start.sh
 RUN chmod +x /init-start.sh
