@@ -1,13 +1,12 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 MAINTAINER "Tien Vo" <tienvv.it@gmail.com>
 
 # Add locales after locale-gen as needed
 # Upgrade packages on image
 # Preparations for sshd
-RUN apt-get -q update \
-    && apt-get install -y net-tools \
-    software-properties-common python-software-properties
+RUN apt -q update \
+    && apt install -y net-tools
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /home/jenkins
@@ -21,16 +20,15 @@ RUN groupadd -g 117 jenkins \
 VOLUME /home/jenkins
 
 # run install git, curl 
-RUN add-apt-repository ppa:ondrej/php \
-    && apt-get update && apt-get install -y unzip git curl \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -y nodejs
+RUN apt install -y unzip git curl \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt install -y nodejs
 
 # run install mysql-server
-RUN apt-get install -y mysql-server
+RUN apt install -y mysql-server redis-server
 
 # run install php
-RUN apt-get install -y php5.6-fpm php5.6-curl php5.6-gd php5.6-geoip \
+RUN apt install -y php5.6-fpm php5.6-curl php5.6-gd php5.6-geoip \
     php5.6-imap php5.6-json php5.6-ldap php5.6-mcrypt php5.6-redis \
     php5.6-mbstring php5.6-xml php5.6-pdo php5.6-pdo-mysql php5.6-zip
 
