@@ -36,7 +36,7 @@ RUN apt-get install -y mysql-server
 # run install php
 RUN apt-get install -y php5.6-fpm php5.6-curl php5.6-gd php5.6-geoip \
     php5.6-imap php5.6-json php5.6-ldap php5.6-mcrypt php5.6-redis \
-    php5.6-mbstring php5.6-xml php5.6-pdo php5.6-pdo-mysql 
+    php5.6-mbstring php5.6-xml php5.6-pdo php5.6-pdo-mysql php5.6-zip
 
 # Configure PHP-FPM
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/5.6/fpm/php.ini \
