@@ -28,15 +28,15 @@ RUN apt install -y unzip git curl \
 RUN apt install -y mysql-server redis-server
 
 # run install php
-RUN apt install -y php5.6-fpm php5.6-curl php5.6-gd php5.6-geoip \
-    php5.6-imap php5.6-json php5.6-ldap php5.6-mcrypt php5.6-redis \
-    php5.6-mbstring php5.6-xml php5.6-pdo php5.6-pdo-mysql php5.6-zip
+RUN apt install -y php7.2-fpm php7.2-curl php7.2-gd php7.2-geoip \
+    php7.2-imap php7.2-json php7.2-ldap php7.2-mcrypt php7.2-redis \
+    php7.2-mbstring php7.2-xml php7.2-pdo php7.2-pdo-mysql php7.2-zip
 
 # Configure PHP-FPM
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/5.6/fpm/php.ini \
-    && sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/5.6/fpm/php.ini \
-    && sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php/5.6/fpm/php.ini \
-    && sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php/5.6/fpm/php.ini
+RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/7.2/fpm/php.ini \
+    && sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.2/fpm/php.ini \
+    && sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php/7.2/fpm/php.ini \
+    && sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php/7.2/fpm/php.ini
 
 # run install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
