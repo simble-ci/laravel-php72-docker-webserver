@@ -45,8 +45,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN mkdir -p "/home/jenkins" \
     && chown jenkins:jenkins "/home/jenkins" \
     && chmod 0777 "/home/jenkins"
-    
-RUN service mysql start && mysql -u root -e "use mysql;update user set authentication_string=password('1111') where user='root'"
 
 ADD config/init-start.sh /init-start.sh
 RUN chmod +x /init-start.sh
