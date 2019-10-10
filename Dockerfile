@@ -14,7 +14,7 @@ ENV HOME /home/gitlab
 RUN useradd -m gitlab && chsh -s /bin/bash gitlab
 
 # Volume for cache
-VOLUME /home/gitlab
+VOLUME /app
 
 # run install unzip curl 
 RUN apt-get install -y unzip curl supervisor nginx
